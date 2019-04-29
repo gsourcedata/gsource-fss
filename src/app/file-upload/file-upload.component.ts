@@ -93,7 +93,14 @@ export class FileUploadComponent implements OnChanges{
   }
   
   hide(){
-    this.uploadCard = false
+    
+    if(!this.uploadCard){
+      console.log('iffffffffffffffffffffffffff')
+      this.uploadCard = true
+    }else{
+      this.uploadCard = false
+    }
+    console.log('uploaddd card', this.uploadCard)
   }
   
 
