@@ -1,0 +1,61 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-6 regbox col-md-offset-3">
+      <h1>Client Registration</h1>
+      <form (submit)="register()">
+        <div class="form-group">
+          <label for="name">Client name</label>
+          <input type="text" class="form-control" name="name" placeholder="Enter client name" [(ngModel)]="credentials.name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email address</label>
+          <input type="email" class="form-control" name="email" placeholder="Enter email" [(ngModel)]="credentials.email">
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="credentials.password">
+        </div>
+        <div class="form-group text-center">
+            <button type="submit" class="btn btn-default ">Register!</button>
+        </div>
+        
+      </form>
+    </div>
+    <div class="col-md-12">
+      <hr>
+    </div>
+    <div class="col-md-12">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Position Column -->
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Email">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Role">
+              <th mat-header-cell *matHeaderCellDef> Role</th>
+              <td mat-cell *matCellDef="let element"> {{element.roles}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+    </div>
+
+  </div>
+
+</div>

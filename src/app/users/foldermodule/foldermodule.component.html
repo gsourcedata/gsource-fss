@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Create New Folder</h1>
+<div mat-dialog-content>
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="Enter Folder Name" value="Sushi" matInput [(ngModel)]="data">
+      </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">No Thanks</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Create</button>
+</div>

@@ -1,0 +1,142 @@
+
+
+
+
+
+
+
+
+<mat-toolbar class="mat-tool">
+    <mat-icon *ngIf="canNavigateUp" class="pointer" (click)="navigateUp()">arrow_back</mat-icon>
+    <span style="margin-left: 8px">{{path || 'Files'}}</span>
+    <span class="spacer"></span>
+    <button class="btn btn-primary" (click)="openNewFolderDialog()"><i class="fa fa-folder" aria-hidden="true"></i> &nbsp;New Folder</button>
+   
+  </mat-toolbar>
+
+  
+
+
+  <div class="fluid-container">
+    <div class="col-md-8">
+      <div class="row card">
+          <div class="col-sm-12">
+              <h4>Upload Section</h4>
+              <div id="fileSelector">
+                  <!-- <button (click)="fileInput.click()" class="input-btn">
+                       <span>Choose Files</span>
+                     
+                    <input #fileInput  type="file" name="fileUplaod" id="fileUpload" (change)="onFileInput($event)" style="display:none;" style="display:none;"
+                  multiple ng2FileSelect [uploader]="uploader">
+                    </button> -->
+                    <span class="btn btn-primary btn-file">
+                      <i class="fa fa-upload" aria-hidden="true"></i> Upload Files  <input type="file" name="fileUplaod" id="fileUpload"
+                      multiple ng2FileSelect [uploader]="uploader">
+                  </span>
+                 
+              </div>
+              <div class='uploadsec' *ngIf="uploadCard">
+                  <div class="row uploadList" *ngFor="let item of uploader.queue">
+                      <div class="col-sm-2">{{item.file.name}}</div>
+                      <div class="col-sm-4">
+                          <div class="progress">
+                              <div class="progress-bar bg-success" 
+                              [ngStyle]="{'width':item.progress+'%'}"></div>
+                          </div>
+                      </div>
+                      <div class="col-sm-4">
+                              <button type="button" class="btn btn-dark  btn-sm" (click)="item.upload()" [disabled]="item.progress > 0">Upload</button>
+                              <span>&nbsp;</span>
+                              <button type="button" class="btn btn-danger  btn-sm" (click)="item.remove()">Cancel</button>
+                      </div>
+                
+                  </div>
+                  <div class="row" *ngIf="uploader?.queue?.length > 0">
+                      <div class="col-sm-1" >
+                          <button type="button" class="btn btn-primary" *ngIf="uploader?.queue?.length > 0" (click)="hide()">Done</button>
+                      </div>
+                      <div class="col-sm-1">
+                          <button type="button" class="btn btn-primary" (click)="uploader.uploadAll()">Upload All</button>
+                      </div>
+                  </div>   
+              </div>
+              
+              
+          </div>                
+      </div>
+
+  <div class="row card">
+       
+  </div>
+  <div class="col-md-2"></div>
+</div>
+  </div>
+  
+
+  <!-- <label for="singleFile">Upload file</label>
+  <input id="singleFile" type="file" [fileUploadInputFor]= "fileUploadQueue"/>
+  <br>
+   
+  <mat-file-upload-queue #fileUploadQueue
+      [fileAlias]="'file'"
+      [httpUrl]="'http://localhost:8180/jax-rs-jersey-application-sample'">
+   
+      <mat-file-upload [file]="file" [id]="i" *ngFor="let file of fileUploadQueue.files; let i = index"></mat-file-upload>
+  </mat-file-upload-queue> -->  
+
+
+
+  <div class="container" fxFlex fxLayout="row" fxLayoutAlign="space-between stretch">
+    <div class="content" fxFlex fxLayout="row">
+      <mat-grid-list cols="4" rowHeight="100px" fxFlex>
+        <mat-grid-tile *ngFor="let element of fileElements" class=file-or-folder>
+          <span [matMenuTriggerFor]="rootMenu" [matMenuTriggerData]="{element: element}" #menuTrigger="matMenuTrigger"></span>
+          <div fxLayout="column" fxLayoutAlign="space-between center" (click)="navigate(element)" (contextmenu)="openMenu($event,element, menuTrigger)">
+            <mat-icon color="warn" class="file-or-folder-icon pointer folder-icon" *ngIf="element.isFolder">folder_open</mat-icon>
+            <mat-icon class="file-or-folder-icon pointer " *ngIf="!element.isFolder && element.Ext != '.png' && element.Ext != '.svg' && element.Ext != '.jpeg'">description</mat-icon>
+            <mat-icon class="file-or-folder-icon pointer" *ngIf="!element.isFolder && element.Ext == '.png' || element.Ext == '.svg' ||element.Ext == '.jpeg' ">photo</mat-icon>
+            <!-- <i class ="fa" [class]="extensionsMap.zip"  *ngIf="!element.isFolder" style="font-size:48px;"></i> -->
+            <span>{{element.name}}</span>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+
+  <mat-grid-list *ngIf="!fileElements?.length > 0" cols="4" rowHeight="100px" fxFlex>
+      <div class="jumbotron text-center">
+          <h1>This Folder is empty</h1> 
+        </div>
+  </mat-grid-list>
+  
+
+  
+  
+  <mat-menu #rootMenu="matMenu" [overlapTrigger]="false">
+    <ng-template matMenuContent let-element="element">
+      <button mat-menu-item (click)="downloadFile(element)">
+            <mat-icon>get_app</mat-icon>
+            <span>Download</span>
+      </button>
+      <button mat-menu-item [matMenuTriggerFor]="moveToMenu" [matMenuTriggerData]="{self: element}">
+        <mat-icon>open_with</mat-icon>
+        <span>Move To</span>
+      </button>
+      <button mat-menu-item (click)="openRenameDialog(element)">
+        <mat-icon>edit</mat-icon>
+        <span>Rename</span>
+      </button>
+      <button mat-menu-item (click)="deleteElement(element)">
+        <mat-icon>delete</mat-icon>
+        <span>Delete</span>
+      </button>
+    </ng-template>
+  </mat-menu>
+  
+  <mat-menu #moveToMenu="matMenu">
+    <ng-template matMenuContent let-self="self">
+      <ng-container *ngFor="let element of fileElements">
+        <button *ngIf="element.isFolder && element.id !== self.id" mat-menu-item (click)="moveElement(self, element)">{{element.name}}</button>
+      </ng-container>
+    </ng-template>
+  </mat-menu>

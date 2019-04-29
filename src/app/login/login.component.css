@@ -1,0 +1,67 @@
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+
+:host {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0px;
+  }
+
+  .mat-form-field {
+    width: 100%;
+    min-width: 300px;
+    color: white !important;
+  }
+
+  mat-card-title,
+  mat-card-content {
+    display: flex;
+    justify-content: center;
+  }
+
+
+
+  .button {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .mat-card-image {
+    width: calc(54% + 32px) !important;
+    margin: 41px 16px 36px 56px !important;
+}
+
+
+.mat-card:not([class*=mat-elevation-z]) {
+    box-shadow: 0 2px 25px 14px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 0 15px 0 rgba(0,0,0,.12) !important;
+}
+
+.mat-card{
+    position: absolute;
+    width: 387px !important;
+    border-radius: 8px !important;
+    z-index: 100;
+    background: #faebd700 !important;
+}
+
+card-title:not(:first-child){
+  color: white;
+}
+
+
+::ng-deep .mat-form-field-underline, ::ng-deep .mat-form-field-ripple {
+  background-color: white !important;
+  color: white !important
+}
+
+::ng-deep .mat-form-field-empty.mat-form-field-label {
+    color: white;
+}
+
+.selectDisable {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}

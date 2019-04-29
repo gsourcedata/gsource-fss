@@ -1,0 +1,78 @@
+:host {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  .file-or-folder {
+    padding: 8px;
+    overflow: hidden;
+  }
+  
+  /* .container{
+    overflow: hidden;
+  } */
+  
+  .file-or-folder-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 50px;
+  }
+  .folder-icon{
+    color: dodgerblue;
+  }
+  
+  .pointer {
+    cursor: pointer;
+  }
+  
+  .spacer {
+    flex: 1 1 auto;
+  }
+  
+  .create-file-icon{
+    color: dodgerblue;
+    font-size: 40px;
+  }
+
+  .mat-tool{
+    margin-top: 55px;
+  }
+
+  .input-btn{
+    background: #3638ff5c;
+    padding: 5px 42px 5px 13px;
+    border-radius: 6px;
+  }
+
+  .uploadList{
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-file {
+  position: relative;
+  overflow: hidden;
+}
+.btn-file input[type=file] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 100%;
+  min-height: 100%;
+  font-size: 100px;
+  text-align: right;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  outline: none;   
+  cursor: inherit;
+  display: block;
+}
+.progress {height: 10px !important;}
